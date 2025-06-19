@@ -9,6 +9,7 @@ import { AuthProvider } from "./context/AuthContext"
 import ProtectedRoute from "./components/ProtectedRoute"
 import NormalTicketRequest from "./components/ticket-sections/NormalTicketRequest"
 import RegisterTicketRequest from "./components/ticket-sections/RegisterTicketRequest"
+import ListaPuntos from "./components/ListaPuntos"
 
 function AppContent() {
   const location = useLocation()
@@ -68,8 +69,17 @@ function AppContent() {
             element={
               <ProtectedRoute>
                 <UserForm />
+              </ProtectedRoute> 
+              }
+                />
+          <Route
+            path="/puntos"
+            element={
+               <ProtectedRoute>
+                <ListaPuntos />
               </ProtectedRoute>
-            }
+            }    
+            
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

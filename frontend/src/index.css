@@ -144,18 +144,18 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #ffffff;
+  background-color: #2c2c2c;
   margin-top: 1rem;
-  color:#1a1a1a
+  color: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 th,
 td {
-  padding: 0.70rem;
-  text-align: left;
-  text-overflow: ellipsis; 
-  overflow: hidden;
-  white-space: nowrap;
+background-color: #2c2c2c; /* fondo de filas */
+  padding: 0.8rem;
+  border-bottom: 1px solid #444;
 }
 
 tbody tr {
@@ -163,12 +163,16 @@ tbody tr {
 }
 
 tbody tr:hover {
-  background-color: #f5f5f5; 
+  background-color: #3a3a3a; /* cambio sutil al pasar el mouse */
 }
 
 th {
-  background-color: #c9e7ff;
-  color: #1a1a1a;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: left;
+  padding: 0.8rem;
+  font-weight: 600;
+  border-bottom: 1px solid #444;
 }
 
 td:last-child a:first-child {
@@ -286,6 +290,15 @@ td:last-child a:first-child:hover {
   color: #ffffff;
 }
 
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
 .form-group {
   margin-bottom: 0.5rem;
 }
@@ -319,6 +332,14 @@ td:last-child a:first-child:hover {
   justify-content: center;
   gap: 1rem;
   margin-top: 2rem;
+}
+
+.big-checkbox {
+  width: 14px;
+  height: 14px;
+  transform: scale(1.5);
+  accent-color: #4A90E2; 
+  margin-left: 0.3rem; /* Espacio entre el checkbox y el texto */
 }
 
 /* Modern login */
