@@ -105,3 +105,13 @@ def unassign_ticket(request):
             {"error": str(e)}, 
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+    
+@api_view(['GET'])
+def get_ticket(request, ticketId):
+    try:
+        ticket = Ticket.objects.get(id_ticket=ticketId)
+        serializer = TicketSerializer(ticket)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Ticket.DoesNotExist:
+        return Response({"error": "Ticket not found"}, status=status.HTTP_404_NOT_FOUND)
+    
