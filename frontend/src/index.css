@@ -789,6 +789,151 @@ td:last-child a:first-child:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
+
+
+/* .ticket-dashboard {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+  padding: 20px;
+}
+
+.ticket-actual {
+  background-color: #f0f8ff;
+  border: 2px solid #007acc;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.ticket-card.open .estado {
+  color: #007acc;
+}
+.ticket-card.in_progress .estado {
+  color: #ffc107;
+}
+.ticket-card.closed .estado {
+  color: #28a745;
+}
+
+.ticket-lista ul {
+  list-style: none;
+  padding: 0;
+}
+
+.ticket-item {
+  padding: 8px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #ccc;
+}
+
+.ticket-item.open .estado {
+  color: #007acc;
+}
+.ticket-item.in_progress .estado {
+  color: #ffc107;
+} */
+
+.ticket-status {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  overflow-y: auto;
+}
+
+/* Panel de información */
+.tickets-box-1{
+  background-color: #0F1829;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+   box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.1);
+  flex: 2 ;
+  min-width: 280px;
+}
+
+.tickets-box-2{
+  background-color: #0F1829;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+   box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.1);
+  flex: 3;
+  min-width: 280px;
+}
+
+
+/* Lista de tickets */
+.tickets-list p {
+  /* margin-bottom: 0.75rem;
+  background: #778189;
+  padding: 0.75rem;
+  border-radius: 0.3rem;
+  border: 1px solid #adeaf5; */
+  margin-bottom: 0.75rem;
+  padding: 0.75rem; ;
+  border: 2px solid #4A90E2;
+  border-radius: 8px;
+  background: #e3f0ff;
+  color: #222;
+  box-shadow: 0 0 8px #4A90E2;
+}
+
+/* Spinner */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.spinner {
+  border: 6px solid #eee;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+}
+
+.status-open {
+  color: #e6c522; /* naranja */
+}
+
+.status-in_progress {
+  color: #44a8eb; /* azul */
+}
+
+.status-closed {
+  color: #27ae60; /* verde */
+}
+
+
+
+/* Responsive */
+@media (max-width: 700px) {
+  .ticket-status {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .tickets-box-1 {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .tickets-box-2 {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+
+
 /* Responsive */
 @media (max-width: 700px) {
   .login-modern-wrapper {
@@ -809,6 +954,12 @@ td:last-child a:first-child:hover {
     justify-content: center;
     gap: 2rem;
   }
+
+  @keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+  
 
 
 }

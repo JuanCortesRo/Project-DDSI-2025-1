@@ -10,6 +10,28 @@ from .models import Attention_Point
 import random
 import string
 
+class TicketListViewAll(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        tickets = Ticket.objects.exclude(status='closed').annotate(
+            priority_order=Case(
+                When(priority='high', then=0),
+                When(priority='low', then=1),
+                output_field=IntegerField(),
+            )
+        ).order_by('priority_order', 'created_at')
+        serializer = TicketSerializer(tickets, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        serializer = TicketSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class TicketListView(APIView):
     permission_classes = [AllowAny]
 
