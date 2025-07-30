@@ -789,6 +789,45 @@ td:last-child a:first-child:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
+.publicity-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.publicity-image-wrapper {
+  position: relative;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.publicity-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1;
+  color: #000;
+}
+
 /* Responsive */
 @media (max-width: 700px) {
   .login-modern-wrapper {
