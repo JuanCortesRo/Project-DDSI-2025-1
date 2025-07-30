@@ -111,7 +111,7 @@ def unassign_ticket(request):
         ticket.save()
         
         return Response({
-            "message": "Ticket cerradoo correctamente",
+            "message": "Ticket cerrado correctamente",
             "ticket": ticket.id_ticket
         })
         
