@@ -6,7 +6,7 @@ class TicketSerializer(serializers.ModelSerializer):
         model = Ticket
         fields = [
             'id_ticket','status', 'priority', 
-            'created_at', 'updated_at', 'user'
+            'created_at', 'updated_at', 'user', 'punto_atencion'
         ]
         read_only_fields = ['id_ticket']
 

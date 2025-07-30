@@ -42,7 +42,7 @@ const TicketStatus = () => {
                 <p className="error">{error}</p>
             ) : (
                 <div>
-                    <h2>Estado del Ticket #{ticket.id}</h2>
+                    <h2>Estado del Ticket {ticket.id_ticket}: </h2>
                     <p><strong>Estado:</strong> {ticket.status}</p>
                     <p><strong>Punto de Atención:</strong> {ticket.attention_point ? ticket.attention_point.name : "No asignado"}</p>
                 </div>
