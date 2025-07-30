@@ -69,6 +69,8 @@ export const attentionPointService = {
 
 export const ticketService = {
   getAll: () => api.get("/api/tickets/"),
+  getById: (id) => api.get(`/api/tickets/${id}/`),
+  getAllTickets: () => api.get("/api/tickets/all/"),
   create: (data) => api.post("/api/tickets/", data),
   assignToPoint: (ticketId, pointId) => api.post("/api/tickets/assign/", {
     ticket_id: ticketId,
