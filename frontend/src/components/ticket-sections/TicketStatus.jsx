@@ -11,7 +11,9 @@ const TicketStatus = () => {
     const [allTickets, setAllTickets] = useState([])
 
     useEffect (() => {
+      let firstLoad = true;
         const fetchTicket = async () => {
+           if (firstLoad) setLoading(true);
 
             try {
                 const response = await ticketService.getById(ticketId)
@@ -22,11 +24,17 @@ const TicketStatus = () => {
                 setError("El ticket no existe o no se pudo cargar")
                 console.error(err)
             } finally {
-                setLoading(false)
+                if (firstLoad) {
+                    setLoading(false);
+                    firstLoad = false;
+                }
             }
         };
 
         fetchTicket();
+        const interval = setInterval(fetchTicket, 5000); // cada 5 segundos
+         return () => clearInterval(interval);
+
     }, [ticketId])
     ; 
     
@@ -50,33 +58,6 @@ const TicketStatus = () => {
         return <p className="error">{error}</p>
     }
 
-
-//     return (
-//         <div className="ticket-status">
-//             {/* <div className="form-container"> */}
-//                 <div className="tickets-panel">
-//                     <h2>Ticket {ticket.id_ticket}: </h2>
-//                     <p><strong>Estado:</strong> {statusLabels[ticket.status]}</p>
-//                     <p><strong>Punto de Atención:</strong> {ticket.punto_atencion}</p>
-//                 </div>
-//             {/* </div> */}
-
-//             <div className="tickets-panel">
-//                 <h3>Estado de Tickets</h3>
-//                 <ul className="tickets-list">
-                    
-//                     {allTickets.map((t) => (            
-//                             <p><strong>Ticket {t.id_ticket}:</strong> {" "}
-//                             {statusLabels[t.status] } - Punto de atención {t.punto_atencion}
-//                             </p>    
-//                     ))}
-//                 </ul> 
-//             </div>
-
-//         </div>
-//     )
-// }
-
 return (
   <div className="ticket-status">
     <div className="tickets-box-1">
@@ -96,13 +77,13 @@ return (
       <h3>Estado de Tickets</h3>
       <ul className="tickets-list">
         {allTickets.map((t) => (
-          <p key={t.id_ticket}>
+          <li key={t.id_ticket}>
             <strong>Ticket {t.id_ticket}:</strong>{" "}
             <span className={`status-${t.status}`}>
               {statusLabels[t.status]}
             </span>{" "}
             - Punto de atención {t.punto_atencion}
-          </p>
+          </li>
         ))}
       </ul>
     </div>

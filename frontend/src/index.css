@@ -868,12 +868,7 @@ td:last-child a:first-child:hover {
 
 
 /* Lista de tickets */
-.tickets-list p {
-  /* margin-bottom: 0.75rem;
-  background: #778189;
-  padding: 0.75rem;
-  border-radius: 0.3rem;
-  border: 1px solid #adeaf5; */
+.tickets-list li {
   margin-bottom: 0.75rem;
   padding: 0.75rem; ;
   border: 2px solid #4A90E2;
@@ -958,8 +953,4 @@ td:last-child a:first-child:hover {
   @keyframes spin {
   to { transform: rotate(360deg); }
 }
-
-  
-
-
 }
