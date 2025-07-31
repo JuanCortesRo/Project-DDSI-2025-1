@@ -1,16 +1,25 @@
 import { useState, useEffect } from "react"
 import { ticketService } from "../../services/api"
-import { useParams } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 
 const TicketStatus = () => {
+    const location = useLocation()
+    const searchParams = new URLSearchParams(location.search)
+    const ticketId = searchParams.get("id")
 
-    const {ticketId} = useParams()
     const [ticket, setTicket] = useState(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
     const [allTickets, setAllTickets] = useState([])
 
     useEffect (() => {
+
+      if (!ticketId) {
+        setError("ID de ticket no proporcionado")
+        setLoading(false)
+        return
+      }
+
       let firstLoad = true;
         const fetchTicket = async () => {
            if (firstLoad) setLoading(true);

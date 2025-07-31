@@ -17,14 +17,14 @@ import PublicityForm from "./components/PublicityForm";
 
 function AppContent() {
   const location = useLocation()
-  const hideNavbar = location.pathname === "/login" || location.pathname === "/ticket-req" || location.pathname === "/ticket-req/new-user"  || location.pathname.startsWith("/ticket-status")
+  const hideNavbar = location.pathname === "/login" || location.pathname === "/ticket-req" || location.pathname === "/ticket-req/new-user" || location.pathname === "/ticket-status"
 
   return (
     <div className="app-container">
       {!hideNavbar && <Navbar />}
       <div className="content">
         <Routes>
-          <Route path="/ticket-status/:ticketId" element={<TicketStatus />} />
+          <Route path="/ticket-status" element={<TicketStatus />} />
           <Route path="/login" element={<Login />} />
           <Route path="/ticket-req" element={<NormalTicketRequest />} />
           <Route path="/ticket-req/new-user" element={<RegisterTicketRequest />} />
