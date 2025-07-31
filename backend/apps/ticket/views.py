@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Case, When, IntegerField
 from rest_framework.permissions import AllowAny
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from .models import Attention_Point
 import random
 import string
@@ -129,6 +129,7 @@ def unassign_ticket(request):
         )
     
 @api_view(['GET'])
+@permission_classes([AllowAny])  
 def get_ticket(request, ticketId):
     try:
         ticket = Ticket.objects.get(id_ticket=ticketId)
