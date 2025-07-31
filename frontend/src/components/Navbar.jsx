@@ -59,7 +59,8 @@ const Navbar = () => {
               {user?.role === "ADMINISTRADOR" && [
                 { to: "/users", text: "Usuarios" },
                 { to: "/attention-points", text: "Puntos de atención" },
-                { to: "/publicity", text: "Publicidad" }
+                { to: "/publicity", text: "Publicidad" },
+                { to: "/ticket-req", text: "test" }
               ].map((item, index) => (
                 <Link key={index} className="dropdown-item" to={item.to}>
                   {item.text}
