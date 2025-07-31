@@ -90,3 +90,10 @@ export const publicityService = {
     },
   delete: (id) => api.delete(`/api/publicity/${id}/`),
 }
+
+export const statisticsService = {
+  getDashboard: () => api.get("/api/statistics/dashboard/"),
+  getTickets: (days = 30) => api.get(`/api/statistics/tickets/?days=${days}`),
+  getUsers: () => api.get("/api/statistics/users/"),
+  getAttentionPoints: () => api.get("/api/statistics/attention-points/"),
+}

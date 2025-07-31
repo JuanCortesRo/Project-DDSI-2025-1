@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'apps.publicity',
     'apps.ticket',
     'apps.user',
+    'apps.statistics',
     'django_q',
 ]
 
