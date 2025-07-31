@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.permissions import AllowAny 
 from .models import Publicity
 from .serializer import PublicitySerializer
 
@@ -31,10 +32,12 @@ class PublicityView(APIView): #requiero explicacion de que es esto -Juan
 
 class PublicityListView(APIView):
     parser_classes = (MultiPartParser, FormParser)
+    permission_classes = [AllowAny] 
     
     def get(self, request):
         publicity = Publicity.objects.all()
         serializer = PublicitySerializer(publicity, many=True)
+
         return Response(serializer.data)
         
     def post(self, request):
