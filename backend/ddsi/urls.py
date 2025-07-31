@@ -19,8 +19,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from apps.user import urls as user_urls
+from django.shortcuts import redirect
 
 urlpatterns = [
+    # path('', lambda request: redirect('/admin/')),
     path('admin/', admin.site.urls),
     path('ticket/', include('apps.ticket.urls')), 
     path('api/attention-points/', include('apps.attention_point.urls')),   
