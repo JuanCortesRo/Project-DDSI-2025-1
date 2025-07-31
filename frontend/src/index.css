@@ -868,7 +868,7 @@ td:last-child a:first-child:hover {
 
 
 /* Lista de tickets */
-.tickets-list li {
+.tickets-lists li {
   margin-bottom: 0.75rem;
   padding: 0.75rem; ;
   border: 2px solid #4A90E2;

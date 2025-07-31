@@ -75,7 +75,7 @@ return (
 
     <div className="tickets-box-2">
       <h3>Estado de Tickets</h3>
-      <ul className="tickets-list">
+      <ul className="tickets-lists">
         {allTickets.map((t) => (
           <li key={t.id_ticket}>
             <strong>Ticket {t.id_ticket}:</strong>{" "}
