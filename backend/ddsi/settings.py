@@ -147,6 +147,7 @@ REST_FRAMEWORK = {
 ##########################
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://qline-frontend.onrender.com/ticket-req",
     "https://qline-frontend.onrender.com",  # dominio de tu frontend
 ]
 #########################
