@@ -20,7 +20,6 @@ const Dashboard = () => {
       try {
         setLoading(true)
         
-        // Fetch all statistics in parallel
         const [dashboardResponse, ticketResponse, userResponse, attentionResponse] = await Promise.all([
           statisticsService.getDashboard(),
           statisticsService.getTickets(selectedTimeframe),
@@ -130,21 +129,22 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h2>Dashboard de Estadísticas</h2>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <label htmlFor="timeframe">Período de análisis:</label>
-          <select 
-            id="timeframe"
-            value={selectedTimeframe} 
-            onChange={(e) => setSelectedTimeframe(Number(e.target.value))}
-            className="form-control"
-            style={{ width: '150px' }}
-          >
-            <option value={7}>Última semana</option>
-            <option value={30}>Último mes</option>
-            <option value={90}>Últimos 3 meses</option>
-          </select>
+      <div className="dashboard-header">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h2>Dashboard de Estadísticas</h2>
+          <div className="dashboard-header-controls">
+            <label htmlFor="timeframe">Período de análisis:</label>
+            <select 
+              id="timeframe"
+              value={selectedTimeframe} 
+              onChange={(e) => setSelectedTimeframe(Number(e.target.value))}
+              className="form-control"
+            >
+              <option value={7}>Última semana</option>
+              <option value={30}>Último mes</option>
+              <option value={90}>Últimos 3 meses</option>
+            </select>
+          </div>
         </div>
       </div>
 

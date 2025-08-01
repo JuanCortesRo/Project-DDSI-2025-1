@@ -72,7 +72,7 @@ const TicketManagement = () => {
                 draggable={idx === 0}
                 onDragStart={idx === 0 ? (e) => handleDragStart(e, ticket) : undefined}
               >
-                Ticket {ticket.id_ticket} - {ticket.status}
+                Ticket {ticket.id_ticket}
               </li>
             ))}
           </ul>

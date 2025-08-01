@@ -46,6 +46,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 100;
 }
 
 .navbar-brand {
@@ -321,16 +324,40 @@ td:last-child a:first-child:hover {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .dashboard-card {
-  background-color: #1a1a1a;
-  border-radius: 8px;
-  padding: 1.5rem;
+  background: var(--primary-color);
+  border-radius: 12px;
+  padding: 2rem;
+  color: white;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
 }
 
 .dashboard-card h3 {
+  color: #ffffff;
   margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.dashboard-card h4 {
+  color: #e0e7ef;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 .ticket-request-center {
@@ -570,7 +597,7 @@ td:last-child a:first-child:hover {
 .ticket-management-container {
   display: flex;
   gap: 1rem;
-  height: 75vh; 
+  height: 80vh; 
   overflow: hidden;
 }
 
@@ -800,50 +827,6 @@ td:last-child a:first-child:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
-
-
-/* .ticket-dashboard {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 24px;
-  padding: 20px;
-}
-
-.ticket-actual {
-  background-color: #f0f8ff;
-  border: 2px solid #007acc;
-  padding: 16px;
-  border-radius: 8px;
-}
-
-.ticket-card.open .estado {
-  color: #007acc;
-}
-.ticket-card.in_progress .estado {
-  color: #ffc107;
-}
-.ticket-card.closed .estado {
-  color: #28a745;
-}
-
-.ticket-lista ul {
-  list-style: none;
-  padding: 0;
-}
-
-.ticket-item {
-  padding: 8px;
-  margin-bottom: 6px;
-  border-bottom: 1px solid #ccc;
-}
-
-.ticket-item.open .estado {
-  color: #007acc;
-}
-.ticket-item.in_progress .estado {
-  color: #ffc107;
-} */
-
 .ticket-status {
   display: flex;
   gap: 2rem;
@@ -1004,198 +987,242 @@ td:last-child a:first-child:hover {
   to { transform: rotate(360deg); }
 }
 
-/* Statistics-specific styles */
-.statistics-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+/* Statistics page specific styles */
+.statistics-page-title {
+  color: var(--primary-color) !important;
+  font-size: 2.5rem;
+  font-weight: 700;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
-.stat-chart {
-  background-color: #1a1a1a;
-  border-radius: 8px;
+.statistics-period-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
   padding: 1.5rem;
+  background: var(--primary-color);
+  border-radius: 12px;
   color: white;
 }
 
-.stat-chart h4 {
-  margin-bottom: 1rem;
-  color: #4A90E2;
+.statistics-period-container label {
+  color: #e0e7ef;
+  font-weight: 500;
+  font-size: 1.1rem;
 }
 
-.chart-bar {
+.statistics-period-container .form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 150px;
+}
+
+.statistics-period-container .form-control:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.statistics-period-container .form-control option {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Dashboard title and header */
+.dashboard-header {
+  background: var(--primary-color);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.dashboard-header h2 {
+  color: #ffffff;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.dashboard-header-controls {
   display: flex;
   align-items: center;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  background-color: #2a2a2a;
-  border-radius: 4px;
+  gap: 1rem;
 }
 
-.chart-bar-fill {
-  height: 20px;
-  background-color: #4A90E2;
-  border-radius: 2px;
-  transition: width 0.3s ease;
-  margin-right: 1rem;
+.dashboard-header-controls label {
+  color: #e0e7ef;
+  font-weight: 500;
+  font-size: 1.1rem;
 }
 
-.chart-bar-label {
-  flex: 1;
-  font-size: 0.9rem;
+.dashboard-header-controls .form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 150px;
 }
 
-.chart-bar-value {
-  font-weight: bold;
-  font-size: 0.9rem;
+.dashboard-header-controls .form-control:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
+.dashboard-header-controls .form-control option {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Tab buttons for statistics */
 .tab-container {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
   margin-bottom: 2rem;
   flex-wrap: wrap;
-}
-
-.progress-ring {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto;
-}
-
-.progress-ring-circle {
-  transition: stroke-dashoffset 0.35s;
-  transform: rotate(-90deg);
-  transform-origin: 50% 50%;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.stats-metric {
-  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-  border-radius: 12px;
-  padding: 1.5rem;
-  text-align: center;
-  border: 1px solid rgba(74, 144, 226, 0.2);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.stats-metric:hover {
-  transform: translateY(-2px);
-  border-color: rgba(74, 144, 226, 0.5);
-}
-
-.stats-metric-value {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin: 0.5rem 0;
-  background: linear-gradient(45deg, #4A90E2, #64B5F6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.stats-metric-label {
-  font-size: 1rem;
-  color: #b0b0b0;
-  font-weight: 500;
-}
-
-.stats-metric-subtitle {
-  font-size: 0.8rem;
-  color: #888;
-  margin-top: 0.5rem;
-}
-
-.timeline-chart {
-  height: 300px;
   padding: 1rem;
-  background-color: #1a1a1a;
-  border-radius: 8px;
-  overflow-x: auto;
-}
-
-.timeline-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem;
-  margin-bottom: 0.5rem;
-  background-color: #2a2a2a;
-  border-radius: 6px;
-  border-left: 4px solid #4A90E2;
-}
-
-.status-indicator {
-  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  text-transform: uppercase;
 }
 
-.status-available {
-  background-color: rgba(39, 174, 96, 0.2);
-  color: #27ae60;
-}
-
-.status-occupied {
-  background-color: rgba(231, 76, 60, 0.2);
-  color: #e74c3c;
-}
-
-.status-maintenance {
-  background-color: rgba(243, 156, 18, 0.2);
-  color: #f39c12;
-}
-
-.chart-container {
-  background-color: #1a1a1a;
+.tab-container .btn {
   border-radius: 8px;
-  padding: 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tab-container .btn-primary {
+  background: #ffffff;
+  color: var(--primary-color);
+  border: none;
+}
+
+.tab-container .btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e7ef;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tab-container .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Chart containers */
+.chart-container {
+  background: var(--primary-color);
+  border-radius: 12px;
+  padding: 2rem;
   margin-bottom: 1.5rem;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 .chart-title {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Table styles within dashboard cards */
+.dashboard-card .table-container {
+  margin-top: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dashboard-card table {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.dashboard-card th {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.dashboard-card td {
+  color: #e0e7ef;
+}
+
+.dashboard-card tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Progress bars in dashboard */
+.dashboard-card .progress-bar-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
   margin-bottom: 1rem;
-  color: #4A90E2;
 }
 
-.chart-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+.dashboard-card .progress-bar-fill {
+  transition: width 0.6s ease;
 }
 
+.dashboard-card .progress-bar-label {
+  color: #e0e7ef;
+  font-weight: 500;
+}
+
+/* Stat cards specific styling */
+.stat-card-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 1rem 0;
+  background: linear-gradient(45deg, #ffffff, #e0e7ef);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+}
+
+.stat-card-subtitle {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Links in dashboard cards */
+.dashboard-card .btn {
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.dashboard-card .btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .statistics-container {
-    grid-template-columns: 1fr;
+  .statistics-period-container,
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
   }
   
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .chart-grid {
+  .dashboard-container {
     grid-template-columns: 1fr;
   }
   
   .tab-container {
     flex-direction: column;
     align-items: center;
-  }
-  
-  .dashboard-container {
-    grid-template-columns: 1fr;
   }
 }
 }
