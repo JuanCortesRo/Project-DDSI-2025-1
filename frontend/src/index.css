@@ -1022,15 +1022,20 @@ td:last-child a:first-child:hover {
 }
 
 .dashboard-header-controls .form-control {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  width: 150px;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #4A90E2;
+  background-color: #23272f;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  outline: none;
 }
 
 .dashboard-header-controls .form-control:focus {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: #646cff;
+  background-color: #23272f;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
