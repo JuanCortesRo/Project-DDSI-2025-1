@@ -61,12 +61,14 @@ const Dashboard = () => {
   }
 
   const StatCard = ({ title, value, subtitle, color = "primary", link = null }) => (
-    <div className="dashboard-card">
-      <h3 className={`stat-card-title stat-card-title-${color}`}>{title}</h3>
-      <div className="stat-card-value">
-        {formatNumber(value)}
+    <div className="dashboard-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
+      <div>
+        <h3 className={`stat-card-title stat-card-title-${color}`}>{title}</h3>
+        <div className="stat-card-value">
+          {formatNumber(value)}
+        </div>
+        {subtitle && <p className="stat-card-subtitle">{subtitle}</p>}
       </div>
-      {subtitle && <p className="stat-card-subtitle">{subtitle}</p>}
       {link && (
         <Link to={link} className="btn btn-primary stat-card-link">
           Ver detalles

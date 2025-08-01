@@ -385,8 +385,7 @@ td:last-child a:first-child:hover {
 
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra verticalmente */
-  /* align-items: center;     Centra horizontalmente */
+  justify-content: center;
 }
 
 .ticket-options {
@@ -1073,10 +1072,15 @@ td:last-child a:first-child:hover {
 .stat-card-subtitle {
   color: #888;
   font-size: 0.9rem;
+  margin-bottom: 1rem; /* Agregar margen inferior para separar del botón */
+  min-height: 1.2rem; /* Asegurar altura mínima para consistencia */
 }
 
 .stat-card-link {
   margin-top: 1rem;
+  /* Asegurar que el botón se mantenga en la parte inferior */
+  align-self: flex-end;
+  width: fit-content;
 }
 
 /* Progress bars */
