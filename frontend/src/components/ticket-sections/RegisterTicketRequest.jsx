@@ -24,6 +24,7 @@ const RegisterTicketRequest = () => {
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
+    const [ticketInfo, setTicketInfo] = useState(null)
     const { pedirTicket, error: ticketError } = useTicketRequest()
 
     const isDniDisabled = !!dniFromQuery
@@ -56,13 +57,21 @@ const RegisterTicketRequest = () => {
         try {
             const dataToSubmit = { ...formData }
             await userService.create(dataToSubmit)
+            
             // Pedir ticket automáticamente después de registrar
-            const ok = await pedirTicket({
+            const result = await pedirTicket({
                 dni: dataToSubmit.dni,
                 prioridad: dataToSubmit.prioridad,
             })
-            if (ok) {
-                navigate("/ticket-req")
+            
+            if (result && result.status === "success") {
+                setTicketInfo({
+                    nombre: result.user.first_name,
+                    apellido: result.user.last_name,
+                    prioridad: result.ticket.priority,
+                    id_ticket: result.ticket.id_ticket,
+                    email: result.user.email,
+                })
             } else {
                 setError(ticketError || "Error al pedir el ticket")
             }
@@ -86,7 +95,12 @@ const RegisterTicketRequest = () => {
         }
     }
 
+
     const handleCancel = () => {
+        navigate("/ticket-req")
+    }
+
+    const handleUnderstood = () => {
         navigate("/ticket-req")
     }
 
@@ -94,93 +108,112 @@ const RegisterTicketRequest = () => {
         <div className="form-container">
             <h2 className="form-title">Registro</h2>
             {error && <div className="alert alert-danger">{error}</div>}
-            <form onSubmit={handleSubmit}>
-
-                <div className="form-row">
+            
+            {ticketInfo ? (
+                <div className="ticket-success-message">
+                    <p>
+                        ¡Registro exitoso! Bienvenido <strong>{ticketInfo.nombre} {ticketInfo.apellido}</strong>, se ha solicitado un ticket<strong>{ticketInfo.prioridad === "high" ? " prioritario" : ""}</strong>.
+                    </p>
+                    <p>
+                        <strong>ID de su ticket:</strong> {ticketInfo.id_ticket}
+                    </p>
+                    <p>
+                        Puede realizar seguimiento de la cola de tickets ingresando al correo que le fue enviado{ticketInfo.email ? ` (${ticketInfo.email})` : ""}.
+                    </p>
+                    <div className="form-actions">
+                        <button className="btn btn-primary" onClick={handleUnderstood}>
+                            Entendido
+                        </button>
+                    </div>
+                </div>
+            ) : (
+                <form onSubmit={handleSubmit}>
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="first_name">Nombre</label>
+                            <input
+                            type="text"
+                            id="first_name"
+                            name="first_name"
+                            className="form-control"
+                            value={formData.first_name}
+                            onChange={handleChange}
+                            disabled={loading}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="last_name">Apellido</label>
+                            <input
+                            type="text"
+                            id="last_name"
+                            name="last_name"
+                            className="form-control"
+                            value={formData.last_name}
+                            onChange={handleChange}
+                            disabled={loading}
+                            />
+                        </div>
+                    </div>
                     <div className="form-group">
-                        <label htmlFor="first_name">Nombre</label>
+                        <label htmlFor="email">Email</label>
                         <input
-                        type="text"
-                        id="first_name"
-                        name="first_name"
-                        className="form-control"
-                        value={formData.first_name}
-                        onChange={handleChange}
-                        disabled={loading}
+                            type="email"
+                            id="email"
+                            name="email"
+                            className="form-control"
+                            value={formData.email}
+                            onChange={handleChange}
+                            disabled={loading}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="last_name">Apellido</label>
+                        <label htmlFor="phone_number">Teléfono</label>
                         <input
-                        type="text"
-                        id="last_name"
-                        name="last_name"
-                        className="form-control"
-                        value={formData.last_name}
-                        onChange={handleChange}
-                        disabled={loading}
+                            type="number"
+                            id="phone_number"
+                            name="phone_number"
+                            className="form-control"
+                            value={formData.phone_number}
+                            onChange={handleChange}
+                            disabled={loading}
                         />
                     </div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        className="form-control"
-                        value={formData.email}
-                        onChange={handleChange}
-                        disabled={loading}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="phone_number">Teléfono</label>
-                    <input
-                        type="number"
-                        id="phone_number"
-                        name="phone_number"
-                        className="form-control"
-                        value={formData.phone_number}
-                        onChange={handleChange}
-                        disabled={loading}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="dni">Cedula</label>
-                    <input
-                        type="number"
-                        id="dni"
-                        name="dni"
-                        className="form-control"
-                        value={formData.dni}
-                        onChange={handleChange}
-                        disabled={isDniDisabled || loading}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="prioridad">
-                        ¿Tiene alguna discapacidad?
-                    </label>
-                    <input
-                        type="checkbox"
-                        className="big-checkbox"
-                        id="prioridad"
-                        name="prioridad"
-                        checked={formData.prioridad}
-                        onChange={handleChange}
-                        disabled={loading}
-                    />
-                </div>
-                <div className="form-actions">
-                    <button className="btn btn-secondary" onClick={handleCancel}>
-                        Cancelar
-                    </button>
-                    <button type="submit" className="btn btn-primary" disabled={loading}>
-                        {loading ? "Guardando..." : "Registrarme y Pedir ticket"}
-                    </button>
-                </div>
-            </form>
+                    <div className="form-group">
+                        <label htmlFor="dni">Cedula</label>
+                        <input
+                            type="number"
+                            id="dni"
+                            name="dni"
+                            className="form-control"
+                            value={formData.dni}
+                            onChange={handleChange}
+                            disabled={isDniDisabled || loading}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="prioridad">
+                            ¿Tiene alguna discapacidad?
+                        </label>
+                        <input
+                            type="checkbox"
+                            className="big-checkbox"
+                            id="prioridad"
+                            name="prioridad"
+                            checked={formData.prioridad}
+                            onChange={handleChange}
+                            disabled={loading}
+                        />
+                    </div>
+                    <div className="form-actions">
+                        <button className="btn btn-secondary" onClick={handleCancel}>
+                            Cancelar
+                        </button>
+                        <button type="submit" className="btn btn-primary" disabled={loading}>
+                            {loading ? "Guardando..." : "Registrarme y Pedir ticket"}
+                        </button>
+                    </div>
+                </form>
+            )}
         </div>
     )
 }

@@ -9,6 +9,9 @@ const TicketManagement = () => {
   const [error, setError] = useState("");
 
   const fetchTickets = async () => {
+    let firstLoad = loading;
+    if (firstLoad) setLoading(true);
+
     try {
       const response = await ticketService.getAll(); 
       setTickets(response.data);
@@ -23,6 +26,10 @@ const TicketManagement = () => {
 
   useEffect(() => {
     fetchTickets();
+    
+    const interval = setInterval(fetchTickets, 5000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   const handleDragStart = (e, ticket) => {
