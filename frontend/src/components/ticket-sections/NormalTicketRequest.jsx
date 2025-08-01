@@ -16,7 +16,7 @@ const NormalTicketRequest = () => {
   useEffect(() => {
     const fetchPublicity = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:8000/api/publicity/")
+        const res = await axios.get("https://qline-backend-yxxr.onrender.com/api/publicity/")
         if (res.data.length > 0) {
           setPublicity(res.data[0])
           setShowPublicity(true)
@@ -27,7 +27,7 @@ const NormalTicketRequest = () => {
     }
 
     fetchPublicity()
-  }, [])
+  }, [])
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -71,15 +71,13 @@ const NormalTicketRequest = () => {
     <div className="publicity-image-wrapper">
       <button className="close-btn" onClick={() => setShowPublicity(false)}>✕</button>
       <img
-        src={`http://127.0.0.1:8000${publicity.image}`}
+        src={`https://qline-backend-yxxr.onrender.com${publicity.image}`}
         alt="Publicidad"
         className="publicity-image"
       />
     </div>
   </div>
 )}
-
-
 
       <div className="form-container">
         <h2 className="form-title">Solicitar Ticket</h2>
