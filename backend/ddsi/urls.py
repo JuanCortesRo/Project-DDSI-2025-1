@@ -29,6 +29,7 @@ urlpatterns = [
     path('api/', include('apps.user.urls')),  
     path('api/', include('apps.ticket.urls')),  
     path('', include('apps.publicity.urls')), 
+    path('api/statistics/', include('apps.statistics.urls')),
 ]
 
 if settings.DEBUG:

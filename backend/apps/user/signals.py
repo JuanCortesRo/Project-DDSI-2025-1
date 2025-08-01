@@ -40,11 +40,7 @@ def send_user_created_email(sender, instance, created, **kwargs):
                             Has sido registrad@ exitosamente en nuestro sistema.<br>
                             A partir de este momento puedes realizar tu solicitud de tiquetes en el siguiente enlace usando tu numero de identificacion<br>
                             <br>
-                            <a href="Espacio-para-insertar-link">Solicita Tiquetes</a>.<br>
-                            <br>
-                            Ademas te invitamos a revisar nuestras empresas aliadas y demas servicios que tenemos para ofrecerte a traves del siguiente enlace<br>
-                            <br>
-                            <a href="Espacio-para-insertar-link">Descubre más de nuestros aliados y servicios</a>.<br>
+                            <a href="https://qline-frontend.onrender.com/ticket-req">Solicita Tiquetes</a>.<br>
                         </p>
                         </td>
                     </tr>
@@ -92,7 +88,7 @@ def send_user_created_email(sender, instance, created, **kwargs):
                             <br>
                             A partir de este momento puedes gestionar tiquetes accediendo al sistema desde el siguiente enlace<br>
                             <br>
-                            <a href="Espacio-para-insertar-link">Gestiona Tiquetes
+                            <a href="https://qline-frontend.onrender.com/login">Gestiona Tiquetes
                         </p>
                         </td>
                     </tr>
