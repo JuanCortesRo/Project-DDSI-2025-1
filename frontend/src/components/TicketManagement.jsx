@@ -8,9 +8,10 @@ const TicketManagement = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const fetchTickets = async () => {
-    let firstLoad = loading;
-    if (firstLoad) setLoading(true);
+  const fetchTickets = async (isInitialLoad = false) => {
+    if (isInitialLoad) {
+      setLoading(true);
+    }
 
     try {
       const response = await ticketService.getAll(); 
@@ -20,14 +21,18 @@ const TicketManagement = () => {
       setError("Error al cargar los tickets");
       console.error(err);
     } finally {
-      setLoading(false);
+      if (isInitialLoad) {
+        setLoading(false);
+      }
     }
   };
 
   useEffect(() => {
-    fetchTickets();
+    fetchTickets(true); // Primera carga con loading
     
-    const interval = setInterval(fetchTickets, 5000);
+    const interval = setInterval(() => {
+      fetchTickets(false); // Actualizaciones automáticas sin loading
+    }, 5000);
     
     return () => clearInterval(interval);
   }, []);
