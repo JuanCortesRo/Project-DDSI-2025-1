@@ -62,13 +62,13 @@ const Dashboard = () => {
 
   const StatCard = ({ title, value, subtitle, color = "primary", link = null }) => (
     <div className="dashboard-card">
-      <h3 style={{ color: `var(--${color}-color)` }}>{title}</h3>
-      <div style={{ fontSize: '2rem', fontWeight: 'bold', margin: '1rem 0' }}>
+      <h3 className={`stat-card-title stat-card-title-${color}`}>{title}</h3>
+      <div className="stat-card-value">
         {formatNumber(value)}
       </div>
-      {subtitle && <p style={{ color: '#888', fontSize: '0.9rem' }}>{subtitle}</p>}
+      {subtitle && <p className="stat-card-subtitle">{subtitle}</p>}
       {link && (
-        <Link to={link} className="btn btn-primary" style={{ marginTop: '1rem' }}>
+        <Link to={link} className="btn btn-primary stat-card-link">
           Ver detalles
         </Link>
       )}
@@ -76,9 +76,9 @@ const Dashboard = () => {
   )
 
   const ChartContainer = ({ title, children }) => (
-    <div className="dashboard-card" style={{ gridColumn: 'span 2' }}>
+    <div className="dashboard-card chart-container-card">
       <h3>{title}</h3>
-      <div style={{ marginTop: '1rem' }}>
+      <div className="chart-content">
         {children}
       </div>
     </div>
@@ -87,23 +87,17 @@ const Dashboard = () => {
   const ProgressBar = ({ label, value, total, color = "#4A90E2" }) => {
     const percentage = total > 0 ? (value / total) * 100 : 0
     return (
-      <div style={{ marginBottom: '1rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+      <div className="progress-bar-container">
+        <div className="progress-bar-header">
           <span>{label}</span>
           <span>{value} / {total} ({percentage.toFixed(1)}%)</span>
         </div>
-        <div style={{ 
-          backgroundColor: '#333', 
-          borderRadius: '4px', 
-          height: '8px',
-          overflow: 'hidden'
-        }}>
+        <div className="progress-bar-background">
           <div 
+            className="progress-bar-fill"
             style={{ 
               backgroundColor: color,
-              height: '100%',
-              width: `${percentage}%`,
-              transition: 'width 0.3s ease'
+              width: `${percentage}%`
             }}
           />
         </div>
@@ -130,7 +124,7 @@ const Dashboard = () => {
   return (
     <div>
       <div className="dashboard-header">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="dashboard-header-content">
           <h2>Dashboard de Estadísticas</h2>
           <div className="dashboard-header-controls">
             <label htmlFor="timeframe">Período de análisis:</label>
@@ -171,21 +165,12 @@ const Dashboard = () => {
       </div>
 
       {/* Detailed Statistics */}
-      <div className="dashboard-container" style={{ marginTop: '2rem' }}>
+      <div className="dashboard-container dashboard-detailed-stats">
         
         {/* Attention Points Performance Chart */}
         {ticketStats && ticketStats.tickets_per_attention_point && (
           <ChartContainer title={`Puntos de Atención que Más Tickets Han Atendido - ${getTimeframeName(selectedTimeframe)}`}>
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'end', 
-              gap: '8px', 
-              height: '300px',
-              margin: '1rem 0',
-              padding: '1rem',
-              borderBottom: '1px solid #444',
-              overflow: 'auto'
-            }}>
+            <div className="attention-points-chart">
               {ticketStats.tickets_per_attention_point
                 .sort((a, b) => b.closed_tickets - a.closed_tickets)
                 .map((point, index) => {
@@ -196,60 +181,29 @@ const Dashboard = () => {
                   const color = colors[index % colors.length]
                   
                   return (
-                    <div key={point.attention_point_id} style={{ 
-                      display: 'flex', 
-                      flexDirection: 'column', 
-                      alignItems: 'center',
-                      minWidth: '80px',
-                      margin: '0 4px'
-                    }}>
-                      <div style={{ 
-                        backgroundColor: color,
-                        width: '60px',
-                        height: `${height}px`,
-                        borderRadius: '4px 4px 0 0',
-                        transition: 'height 0.3s ease',
-                        marginBottom: '0.5rem',
-                        position: 'relative',
-                        display: 'flex',
-                        alignItems: 'end',
-                        justifyContent: 'center',
-                        paddingBottom: '8px'
-                      }}>
-                        <span style={{ 
-                          color: 'white', 
-                          fontSize: '0.9rem', 
-                          fontWeight: 'bold',
-                          textShadow: '1px 1px 2px rgba(0,0,0,0.7)'
-                        }}>
+                    <div key={point.attention_point_id} className="chart-bar-container">
+                      <div 
+                        className="chart-bar"
+                        style={{ 
+                          backgroundColor: color,
+                          height: `${height}px`
+                        }}
+                      >
+                        <span className="chart-bar-value">
                           {point.closed_tickets}
                         </span>
                       </div>
-                      <div style={{ 
-                        fontSize: '0.8rem', 
-                        fontWeight: 'bold',
-                        textAlign: 'center',
-                        marginBottom: '0.25rem'
-                      }}>
+                      <div className="chart-bar-id">
                         {point.attention_point_id}
                       </div>
-                      <div style={{ 
-                        fontSize: '0.7rem', 
-                        color: '#888',
-                        textAlign: 'center'
-                      }}>
+                      <div className="chart-bar-label">
                         {point.closed_tickets} atendidos
                       </div>
                     </div>
                   )
                 })}
             </div>
-            <div style={{ 
-              fontSize: '0.9rem', 
-              color: '#888', 
-              textAlign: 'center', 
-              marginTop: '1rem' 
-            }}>
+            <div className="chart-footer">
               Datos de tickets cerrados para el período: {getTimeframeName(selectedTimeframe)}
             </div>
           </ChartContainer>
@@ -272,26 +226,14 @@ const Dashboard = () => {
         {/* Recent Activity */}
         {ticketStats && ticketStats.most_active_users && (
           <ChartContainer title={`Usuarios Más Activos - ${getTimeframeName(selectedTimeframe)}`}>
-            <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
+            <div className="active-users-list">
               {ticketStats.most_active_users.map((user, index) => (
-                <div key={user.dni} style={{ 
-                  display: 'flex', 
-                  justifyContent: 'space-between', 
-                  padding: '0.5rem', 
-                  borderBottom: '1px solid #333',
-                  alignItems: 'center'
-                }}>
-                  <div>
-                    <strong>{user.first_name} {user.last_name}</strong>
-                    <div style={{ fontSize: '0.8rem', color: '#888' }}>DNI: {user.dni}</div>
+                <div key={user.dni} className="active-user-item">
+                  <div className="active-user-info">
+                    <div className="active-user-name">{user.first_name} {user.last_name}</div>
+                    <div className="active-user-dni">DNI: {user.dni}</div>
                   </div>
-                  <div style={{ 
-                    backgroundColor: '#4A90E2', 
-                    color: 'white', 
-                    padding: '0.25rem 0.5rem', 
-                    borderRadius: '4px',
-                    fontSize: '0.9rem'
-                  }}>
+                  <div className="active-user-tickets">
                     {user.ticket_count} tickets
                   </div>
                 </div>
@@ -304,11 +246,11 @@ const Dashboard = () => {
         {ticketStats && ticketStats.average_resolution_time_hours && (
           <div className="dashboard-card">
             <h3>Métricas de Rendimiento - {getTimeframeName(selectedTimeframe)}</h3>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 'bold', margin: '1rem 0' }}>
+            <div className="performance-metrics">
+              <div className="performance-value">
                 {ticketStats.average_resolution_time_hours.toFixed(1)}h
               </div>
-              <div style={{ color: '#888' }}>Tiempo promedio de resolución</div>
+              <div className="performance-label">Tiempo promedio de resolución</div>
             </div>
           </div>
         )}
