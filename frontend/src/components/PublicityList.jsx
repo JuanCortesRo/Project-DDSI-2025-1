@@ -39,16 +39,23 @@ const PublicityList = () => {
 
   const columns = [
     { key: "id_publicity", label: "ID" },
+    { key: "title", label: "Título" },
+    { key: "content", label: "Contenido" },
+    { key: "start_date", label: "Fecha de Inicio" },
+    { key: "end_date", label: "Fecha de Fin" },
+    { key: "is_active", label: "Activo", render: (item) => (item.is_active ? "Sí" : "No") },
     { 
       key: "image_url", 
       label: "Imagen", 
       type: "image",
       render: (item) => (
-        <img 
-          src={item.image_url} 
-          alt="Publicidad" 
-          style={{ width: '100px', height: 'auto' }} 
-        />
+        item.image_url ? (
+          <img 
+            src={item.image_url} 
+            alt="Publicidad" 
+            style={{ width: '100px', height: 'auto' }} 
+          />
+        ) : 'Sin imagen'
       )
     }
   ];

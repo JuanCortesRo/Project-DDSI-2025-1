@@ -4,7 +4,7 @@ class Publicity(models.Model):
     id_publicity = models.CharField(max_length=3, primary_key=True, editable=False)
     title = models.CharField(max_length=255)
     content = models.TextField()
-    image = models.ImageField(upload_to='publicidad_images', null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     start_date = models.DateField()
     end_date = models.DateField()
     is_active = models.BooleanField(default=True)

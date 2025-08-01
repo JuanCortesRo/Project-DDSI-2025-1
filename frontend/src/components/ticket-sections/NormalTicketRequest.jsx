@@ -70,11 +70,11 @@ const NormalTicketRequest = () => {
   <div className="publicity-modal">
     <div className="publicity-image-wrapper">
       <button className="close-btn" onClick={() => setShowPublicity(false)}>✕</button>
-      <img
-        src={`https://qline-backend-yxxr.onrender.com${publicity.image}`}
-        alt="Publicidad"
-        className="publicity-image"
-      />
+        <img
+          src={publicity.image_url || publicity.image} 
+          alt="Publicidad"
+          className="publicity-image"
+        />
     </div>
   </div>
 )}
