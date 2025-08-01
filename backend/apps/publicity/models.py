@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField 
 
 class Publicity(models.Model):
     id_publicity = models.CharField(max_length=3, primary_key=True, editable=False)
