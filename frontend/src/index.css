@@ -570,8 +570,8 @@ td:last-child a:first-child:hover {
 .ticket-management-container {
   display: flex;
   gap: 1rem;
-  height: 125px; 
-  overflow: hidden; 
+  height: 100vh; 
+  overflow: hidden;
 }
 
 .attention-points-panel {
@@ -587,9 +587,12 @@ td:last-child a:first-child:hover {
 
 .attention-points-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajusta el tamaño mínimo de los elementos */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
-  flex-grow: 1; /* Permite que la grilla ocupe todo el espacio disponible */
+  grid-auto-rows: 150px;
+  overflow-y: auto; 
+  flex-grow: 1;
+  padding: 1rem 0;
 }
 
 .attention-point {
