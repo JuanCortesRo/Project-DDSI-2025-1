@@ -338,6 +338,9 @@ td:last-child a:first-child:hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 220px; /* Altura mínima consistente */
 }
 
 .dashboard-card:hover {
@@ -1036,6 +1039,7 @@ td:last-child a:first-child:hover {
   border-color: #646cff;
   background-color: #23272f;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
 }
 
 .chart-container-card {
