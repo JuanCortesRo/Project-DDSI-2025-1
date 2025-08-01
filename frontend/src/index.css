@@ -570,7 +570,8 @@ td:last-child a:first-child:hover {
 .ticket-management-container {
   display: flex;
   gap: 1rem;
-  height: 100%;
+  height: 125px; 
+  overflow: hidden; 
 }
 
 .attention-points-panel {
@@ -581,6 +582,7 @@ td:last-child a:first-child:hover {
   color: white;
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 
 .attention-points-grid {
@@ -598,10 +600,11 @@ td:last-child a:first-child:hover {
   color: white;
   font-weight: bold;
   display: flex;
-  flex-direction: column; /* Cambia a columna para apilar elementos */
+  flex-direction: column; 
   align-items: center;
   justify-content: space-between;
-  height: 125px; /* Altura fija para los puntos de atención */
+  height: 125px; 
+  max-height: 125px;
   border: 2px solid #444;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
@@ -675,17 +678,22 @@ td:last-child a:first-child:hover {
 }
 
 .tickets-panel {
-  flex: 0.6; /* Cuanto ocupa la lista con respecto a la grilla de PA */
+  flex: 0.6;
   background-color: var(--primary-color);
   padding: 1rem;
   border-radius: 8px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .tickets-list {
   list-style: none;
   padding: 0;
   margin: 1rem 0;
+  overflow-y: auto; 
+  flex-grow: 1;
 }
 
 .ticket-item {
