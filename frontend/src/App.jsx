@@ -40,7 +40,7 @@ function AppContent() {
           <Route
             path="/dashboard"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={['ADMINISTRADOR']}>
                 <Dashboard />
               </ProtectedRoute>
             }
@@ -64,7 +64,7 @@ function AppContent() {
           <Route
             path="/users/new"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={['ADMINISTRADOR']}>
                 <UserForm />
               </ProtectedRoute>
             }
@@ -80,20 +80,26 @@ function AppContent() {
           <Route
             path="/attention-points"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={['ADMINISTRADOR']}>
                 <AttentionPointList />
               </ProtectedRoute>
             }
           />
-          <Route path="/publicity" 
-          element={
-          <PublicityList />
-          } 
+          <Route
+            path="/publicity"
+            element={
+              <ProtectedRoute allowedRoles={['ADMINISTRADOR']}>
+                <PublicityList />
+              </ProtectedRoute>
+            }
           />
-          <Route path="/publicity/create" 
-          element={
-          <PublicityForm />
-          } 
+           <Route
+            path="/publicity/create"
+            element={
+              <ProtectedRoute allowedRoles={['ADMINISTRADOR']}>
+                <PublicityForm />
+              </ProtectedRoute>
+            }
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
