@@ -39,7 +39,7 @@ def send_ticket_created_email(sender, instance, created, **kwargs):
                     Tu tiquete <strong>#{instance.id_ticket}</strong> ha sido creado exitosamente<br>
                     Puedes consultar el estado de tu tiquete a traves del siguiente enlace
                     <br><br>
-                    <a href="https://qline-frontend.onrender.com/ticket-status/{instance.id_ticket}">Consultar estado de mi tiquete</a>
+                    <a href="https://qline-frontend.onrender.com/ticket-status?id={instance.id_ticket}">Consultar estado de mi tiquete</a>
                     <br><br>
                     Gracias por utilizar nuestros servicios
                     </p>
