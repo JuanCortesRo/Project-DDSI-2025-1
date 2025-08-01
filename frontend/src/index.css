@@ -570,7 +570,7 @@ td:last-child a:first-child:hover {
 .ticket-management-container {
   display: flex;
   gap: 1rem;
-  height: 100vh; 
+  height: 75vh; 
   overflow: hidden;
 }
 
@@ -589,7 +589,7 @@ td:last-child a:first-child:hover {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
-  grid-auto-rows: 150px;
+  grid-auto-rows: 130px;
   overflow-y: auto; 
   flex-grow: 1;
   padding: 1rem 0;
